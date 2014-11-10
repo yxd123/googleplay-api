@@ -122,7 +122,7 @@ class GooglePlayAPI(object):
             headers = {
                 "Accept-Encoding": "",
             }
-            response = requests.post(self.URL_LOGIN, data=params, headers=headers, verify=False)
+            response = requests.post(self.URL_LOGIN, proxies=config.PROXIES, data=params, headers=headers, verify=False)
             data = response.text.split()
             params = {}
             for d in data:
@@ -158,9 +158,9 @@ class GooglePlayAPI(object):
 
             url = "https://android.clients.google.com/fdfe/%s" % path
             if datapost is not None:
-                response = requests.post(url, data=datapost, headers=headers, verify=False)
+                response = requests.post(url, proxies=config.PROXIES, data=datapost, headers=headers, verify=False)
             else:
-                response = requests.get(url, headers=headers, verify=False)
+                response = requests.get(url, proxies=config.PROXIES, headers=headers, verify=False)
             data = response.content
 
         '''
@@ -275,6 +275,6 @@ class GooglePlayAPI(object):
                    "Accept-Encoding": "",
                   }
 
-        response = requests.get(url, headers=headers, cookies=cookies, verify=False)
+        response = requests.get(url, proxies=config.PROXIES, headers=headers, cookies=cookies, verify=False)
         return response.content
 
