@@ -23,6 +23,8 @@ To get your `androidID`, use `*#*#8255#*#*` on your phone to start *Gtalk Monito
 
 In order to authenticate to Google Play, you also need to provide either your Google login and password, or a valid subAuthToken.
 
+What's more, when i run some command, it is `blocking in post`, which is because my network can't connect to googleplay, so must be add a `proxies`.
+
 ## Usage
 
 ### Searching
