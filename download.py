@@ -29,6 +29,9 @@ api.login(GOOGLE_LOGIN, GOOGLE_PASSWORD, AUTH_TOKEN)
 
 # Get the version code and the offer type from the app details
 m = api.details(packagename)
+if m == False:
+    print 'error in api.details'
+    sys.exit(1)
 doc = m.docV2
 vc = doc.details.appDetails.versionCode
 ot = doc.offer[0].offerType
@@ -36,6 +39,9 @@ ot = doc.offer[0].offerType
 # Download
 print "Downloading %s..." % sizeof_fmt(doc.details.appDetails.installationSize),
 data = api.download(packagename, vc, ot)
+if data == False:
+    print 'error in api.download'
+    sys.exit(1)
 open(filename, "wb").write(data)
 print "Done"
 

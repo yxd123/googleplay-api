@@ -29,9 +29,8 @@ if (len(sys.argv) >= 4):
 api = GooglePlayAPI(ANDROID_ID)
 api.login(GOOGLE_LOGIN, GOOGLE_PASSWORD, AUTH_TOKEN)
 
-try:
-    message = api.search(request, nb_res, offset)
-except:
+message = api.search(request, nb_res, offset)
+if message == False:
     print "Error: something went wrong. Maybe the nb_res you specified was too big?"
     sys.exit(1)
 

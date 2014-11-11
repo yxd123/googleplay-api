@@ -161,6 +161,9 @@ class GooglePlayAPI(object):
                 response = requests.post(url, proxies=config.PROXIES, data=datapost, headers=headers, verify=False)
             else:
                 response = requests.get(url, proxies=config.PROXIES, headers=headers, verify=False)
+            if response.status_code != 200:
+                print 'HTTP status code: ',response.status_code
+                return False
             data = response.content
 
         '''
@@ -188,6 +191,8 @@ class GooglePlayAPI(object):
             path += "&o=%d" % int(offset)
 
         message = self.executeRequestApi2(path)
+        if message == False:
+            return False
         return message.payload.searchResponse
 
     def details(self, packageName):
@@ -195,6 +200,8 @@ class GooglePlayAPI(object):
         packageName is the app unique ID (usually starting with 'com.')."""
         path = "details?doc=%s" % requests.utils.quote(packageName)
         message = self.executeRequestApi2(path)
+        if message == False:
+            return False
         return message.payload.detailsResponse
 
     def bulkDetails(self, packageNames):
@@ -209,6 +216,8 @@ class GooglePlayAPI(object):
         req.docid.extend(packageNames)
         data = req.SerializeToString()
         message = self.executeRequestApi2(path, data, "application/x-protobuf")
+        if message == False:
+            return False
         return message.payload.bulkDetailsResponse
 
     def browse(self, cat=None, ctr=None):
@@ -220,6 +229,8 @@ class GooglePlayAPI(object):
         if (ctr != None):
             path += "&ctr=%s" % requests.utils.quote(ctr)
         message = self.executeRequestApi2(path)
+        if message == False:
+            return False
         return message.payload.browseResponse
 
     def list(self, cat, ctr=None, nb_results=None, offset=None):
@@ -236,6 +247,8 @@ class GooglePlayAPI(object):
         if (offset != None):
             path += "&o=%s" % requests.utils.quote(offset)
         message = self.executeRequestApi2(path)
+        if message == False:
+            return False
         return message.payload.listResponse
     
     def reviews(self, packageName, filterByDevice=False, sort=2, nb_results=None, offset=None):
@@ -250,6 +263,8 @@ class GooglePlayAPI(object):
         if(filterByDevice):
             path += "&dfil=1"
         message = self.executeRequestApi2(path)
+        if message == False:
+            return False
         return message.payload.reviewResponse
     
     def download(self, packageName, versionCode, offerType=1):
@@ -262,6 +277,8 @@ class GooglePlayAPI(object):
         path = "purchase"
         data = "ot=%d&doc=%s&vc=%d" % (offerType, packageName, versionCode)
         message = self.executeRequestApi2(path, data)
+        if message == False:
+            return False
 
         url = message.payload.buyResponse.purchaseStatusResponse.appDeliveryData.downloadUrl
         cookie = message.payload.buyResponse.purchaseStatusResponse.appDeliveryData.downloadAuthCookie[0]

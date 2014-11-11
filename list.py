@@ -31,10 +31,11 @@ if (len(sys.argv) == 5):
 
 api = GooglePlayAPI(ANDROID_ID)
 api.login(GOOGLE_LOGIN, GOOGLE_PASSWORD, AUTH_TOKEN)
-try:
-    message = api.list(cat, ctr, nb_results, offset)
-except:
+
+message = api.list(cat, ctr, nb_results, offset)
+if message == False:
     print "Error: HTTP 500 - one of the provided parameters is invalid"
+    sys.exit(1)
 
 if (ctr is None):
     print SEPARATOR.join(["Subcategory ID", "Name"])
