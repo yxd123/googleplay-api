@@ -32,7 +32,7 @@ api.login(GOOGLE_LOGIN, GOOGLE_PASSWORD, AUTH_TOKEN)
 message = api.search(request, nb_res, offset)
 if message == False:
     print "Error: something went wrong. Maybe the nb_res you specified was too big?"
-    sys.exit(1)
+    exit(1)
 
 print_header_line()
 doc = message.doc[0]

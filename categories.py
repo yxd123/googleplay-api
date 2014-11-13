@@ -16,7 +16,7 @@ api.login(GOOGLE_LOGIN, GOOGLE_PASSWORD, AUTH_TOKEN)
 response = api.browse()
 if response == False:
     print 'error in api.browse'
-    sys.exit(1)
+    exit(1)
 
 print SEPARATOR.join(["ID", "Name"])
 for c in response.category:

@@ -250,6 +250,22 @@ class GooglePlayAPI(object):
         if message == False:
             return False
         return message.payload.listResponse
+
+    def getNextPage(self, nextPageUrl):
+        '''next page url, depanding on head page'''
+        path = ''
+        params =  nextPageUrl.split('&')
+        for param in params:
+            key, value = param.split('=')
+            if key == 'ctntkn':
+                path += key + '=' + value + '&'
+            else:
+                path += key + '=' + requests.utils.quote(value) + '&'
+        path = path[:-1]
+        message = self.executeRequestApi2(path)
+        if message == False:
+            return False
+        return message.payload.listResponse
     
     def reviews(self, packageName, filterByDevice=False, sort=2, nb_results=None, offset=None):
         """Browse reviews.

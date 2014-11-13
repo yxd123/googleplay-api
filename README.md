@@ -102,6 +102,19 @@ And then list apps within them:
     GO Weather EX          com.gau.go.launcherex.gowidget.weatherwidget  GO Launcher EX   0          Gratuit  1           25            6.5MB   4.40    10 000 000+
     Thermomètre (Gratuit)  com.xiaad.android.thermometertrial            Mobiquité        0          Gratuit  1           60            3.6MB   3.78    1 000 000+
 
+Now, list more and more apps with:
+    
+    $python list.py [category] [subcategory] [nb_results] [offset]
+    @category      use categories.py to get it
+    @subcategory   use before commond to get it
+    @nb_results    numbers of apps you want get
+    @offset        everytime you get
+    
+    $ pythn list.py WEATHER apps_topselling_free 200 20
+
+    above command will get 20 apps everytime, and get 200 apps finally.
+
+
 ### Viewing permissions
 
 You can use `permissions.py` to see what permissions are required by an app without downloading it:

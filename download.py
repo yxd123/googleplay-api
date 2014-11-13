@@ -31,7 +31,7 @@ api.login(GOOGLE_LOGIN, GOOGLE_PASSWORD, AUTH_TOKEN)
 m = api.details(packagename)
 if m == False:
     print 'error in api.details'
-    sys.exit(1)
+    exit(1)
 doc = m.docV2
 vc = doc.details.appDetails.versionCode
 ot = doc.offer[0].offerType
